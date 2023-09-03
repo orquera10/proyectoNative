@@ -42,15 +42,17 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     modalTitle: {
-        color: 'white',
+        color: '#fbfbfb',
         backgroundColor: '#ccc',
         fontSize: 18,
+        fontWeight: 'bold'
     },
     modalMessage: {
-        color: 'white',
+        color: '#fbfbfb',
         marginBottom: 15,
         justifyContent: 'center',
         alignItems: 'center',
+        fontWeight: 'bold'
     },
     modalButton: {
         marginTop: 15,

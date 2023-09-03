@@ -8,7 +8,7 @@ import React, { useState } from 'react'
 
 import Modal from './components/Modal'
 import ListContainer from './components/ListContainer'
-import InputContainer from './components/InputContainer'
+import InputContainer from './components/InputTextContainer'
 
 export default function App() {
   const [textValue, setTextValue] = useState('')
