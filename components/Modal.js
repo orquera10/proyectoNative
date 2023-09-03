@@ -1,5 +1,4 @@
 import { Button, Modal as NewModal, StyleSheet, Text, View } from 'react-native'
-
 import React from 'react'
 
 const Modal = ({ modalVisible, onHandleDelete }) => {
@@ -7,14 +6,14 @@ const Modal = ({ modalVisible, onHandleDelete }) => {
         <NewModal visible={modalVisible} animationType="slide" transparent={true}>
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
-                    <View style={styles.modalTitle}>
-                        <Text>Eliminar</Text>
+                    <View>
+                        <Text style={styles.modalTitleText}>Eliminar</Text>
                     </View>
                     <View style={styles.modalMessage}>
-                        <Text>Estas seguro de eliminar este elemento?</Text>
+                        <Text style={styles.modalMessageText}>Estás seguro de eliminar este elemento?</Text>
                     </View>
                     <View style={styles.modalButton}>
-                        <Button title="confirmar" onPress={onHandleDelete} />
+                        <Button title="Confirmar" onPress={onHandleDelete} color={'#fe6755'}/>
                     </View>
                 </View>
             </View>
@@ -31,7 +30,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     modalContent: {
-        backgroundColor: 'red',
+        backgroundColor: '#000',
         borderRadius: 20,
         padding: 35,
         alignItems: 'center',
@@ -41,20 +40,22 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
         elevation: 5,
     },
-    modalTitle: {
-        color: '#fbfbfb',
-        backgroundColor: '#ccc',
+    modalTitleText: {
+        color: '#fe6755',
         fontSize: 18,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginBottom: 10
     },
     modalMessage: {
-        color: '#fbfbfb',
         marginBottom: 15,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    modalMessageText: {
+        color: '#fbfbfb',
         fontWeight: 'bold'
     },
     modalButton: {
         marginTop: 15,
     },
-})
+});
