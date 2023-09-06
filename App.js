@@ -9,14 +9,22 @@ import React, { useState } from 'react'
 import Modal from './components/Modal'
 import ListContainer from './components/ListContainer'
 import InputContainer from './components/InputTextContainer'
+import Material from '@expo/vector-icons/MaterialIcons'
 
 export default function App() {
   const [textValue, setTextValue] = useState('')
   const [itemsList, setItemsList] = useState([])
   const [itemSelected, setItemSelected] = useState()
   const [modalVisible, setModalVisible] = useState(false)
+  const [color, setColor] = useState('#fe6855')
 
   const onHandleChangeItem = text => setTextValue(text)
+
+  const cambiarColor = (item) => {
+    const nuevoColor = color === '#fe6855' ? '#4DA167' : '#fe6855';
+    item.color = nuevoColor;
+    setColor(nuevoColor);
+  }
 
   const addItem = () => {
     if (textValue === '') {
@@ -25,15 +33,16 @@ export default function App() {
     console.log('ejecuta la funcion de agregar elemnto')
     setItemsList(prevState => [
       ...prevState,
-      { id: Math.random(), value: textValue },
+      { id: Math.random(), value: textValue, color: '#fe6855' },
     ])
     setTextValue('')
   }
 
   const renderListItem = ({ item, index }) => (
     <TouchableOpacity
-      style={styles.itemContainer}
-      onPress={() => onHandleModal(index)}
+      style={[styles.itemContainer, { backgroundColor: item.color, shadowColor: item.color, }]}
+      onPress={() => cambiarColor(item)}
+      onLongPress={() => onHandleModal(index)}
     >
       <Text style={styles.textItem}>{item?.value}</Text>
     </TouchableOpacity>
@@ -55,9 +64,18 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Shopping List</Text>
-      <InputContainer textValue={textValue} onHandleChangeItem={onHandleChangeItem} addItem={addItem}/>
-      <ListContainer itemsList={itemsList} renderListItem={renderListItem}/>
-      <Modal modalVisible={modalVisible} onHandleDelete={onHandleDelete} />
+      <InputContainer textValue={textValue} onHandleChangeItem={onHandleChangeItem} addItem={addItem} />
+      <ListContainer itemsList={itemsList} renderListItem={renderListItem} />
+      <View style={styles.press}>
+        <Material name='touch-app' size={20} color={'#4DA167'} />
+        <Text style={[styles.textItem, { color: '#4DA167' }]}>Press to complete</Text>
+      </View>
+      <View style={styles.press}>
+        <Material name='touch-app' size={25} color={'#fe6755'} />
+        <Text style={[styles.textItem, { color: '#fe6755' }]}>Long press to delete</Text>
+      </View>
+
+      <Modal modalVisible={modalVisible} onHandleDelete={onHandleDelete} setModalVisible={setModalVisible} />
     </View>
   )
 }
@@ -94,5 +112,11 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: '600',
     fontVariant: 'no-common-ligatures',
+  },
+  press: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15
   },
 })

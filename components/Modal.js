@@ -1,7 +1,7 @@
 import { Button, Modal as NewModal, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const Modal = ({ modalVisible, onHandleDelete }) => {
+const Modal = ({ modalVisible, onHandleDelete, setModalVisible }) => {
     return (
         <NewModal visible={modalVisible} animationType="slide" transparent={true}>
             <View style={styles.modalContainer}>
@@ -13,7 +13,12 @@ const Modal = ({ modalVisible, onHandleDelete }) => {
                         <Text style={styles.modalMessageText}>Estás seguro de eliminar este elemento?</Text>
                     </View>
                     <View style={styles.modalButton}>
-                        <Button title="Confirmar" onPress={onHandleDelete} color={'#fe6755'}/>
+                        <View style={styles.button}>
+                            <Button title="Cancelar" onPress={() => setModalVisible(false)} color={'#1f487e'} />
+                        </View>
+                        <View style={styles.button}>
+                            <Button title="Confirmar" onPress={onHandleDelete} color={'#fe6755'} />
+                        </View>
                     </View>
                 </View>
             </View>
@@ -56,6 +61,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     modalButton: {
-        marginTop: 15,
+        marginTop: 5,
+        flexDirection: 'row',
+    },
+    button:{
+        margin: 10,
     },
 });
